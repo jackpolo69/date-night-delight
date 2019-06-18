@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Begin Survey</h1>
+    <div id=bestMatch></div>
+    <form>
+        <p>name:</p><input id="name" type="text">
+        <p>img url:</p><input id="img" type="text">
+        <p>
+            I watch sports very often
+        </p>
+        <select class="select">
+            <option value="1">never</option>
+            <option value="2">least likely </option>
+            <option value="3">not sure</option>
+            <option value="4">somewhat likely</option>
+            <option value="5">most likely </option>
+        </select>
+        <p>
+            I love to read books
+        </p>
+        <select class="select">
+            <option value="1">never</option>
+            <option value="2">least likely </option>
+            <option value="3">not sure</option>
+            <option value="4">somewhat likely</option>
+            <option value="5">most likely </option>
+        </select>
+        <p>
+            I skydive often
+        </p>
+        <select class="select">
+            <option value="1">never</option>
+            <option value="2">least likely </option>
+            <option value="3">not sure</option>
+            <option value="4">somewhat likely</option>
+            <option value="5">most likely </option>
+        </select>
+        <p>
+            I love watching tv
+        </p>
+        <select class="select">
+            <option value="1">never</option>
+            <option value="2">least likely </option>
+            <option value="3">not sure</option>
+            <option value="4">somewhat likely</option>
+            <option value="5">most likely </option>
+        </select>
+        <p>
+            I like experimenting with different cultural foods
+        </p>
+        <select class="select">
+            <option value="1">never</option>
+            <option value="2">least likely </option>
+            <option value="3">not sure</option>
+            <option value="4">somewhat likely</option>
+            <option value="5">most likely </option>
+        </select>
+        <p>
+            I love bungee jumping
+        </p>
+        <select class="select">
+            <option value="1">never</option>
+            <option value="2">least likely </option>
+            <option value="3">not sure</option>
+            <option value="4">somewhat likely</option>
+            <option value="5">most likely </option>
+        </select>
+        <p>
+            I am very religious
+        </p>
+        <select class="select">
+            <option value="1">never</option>
+            <option value="2">least likely </option>
+            <option value="3">not sure</option>
+            <option value="4">somewhat likely</option>
+            <option value="5">most likely </option>
+        </select>
+        <p>
+            I drink alcohol
+        </p>
+        <select class="select">
+            <option value="1">never</option>
+            <option value="2">least likely </option>
+            <option value="3">not sure</option>
+            <option value="4">somewhat likely</option>
+            <option value="5">most likely </option>
+        </select>
+        <p>
+            I smoke cigarettes
+        </p>
+        <select class="select">
+            <option value="1">never</option>
+            <option value="2">least likely </option>
+            <option value="3">not sure</option>
+            <option value="4">somewhat likely</option>
+            <option value="5">most likely </option>
+        </select>
+        <p>
+            I wants kids
+        </p>
+        <select class="select">
+            <option value="1">never</option>
+            <option value="2">least likely </option>
+            <option value="3">not sure</option>
+            <option value="4">somewhat likely</option>
+            <option value="5">most likely </option>
+        </select>
+        <button id="submit-btn" type= "submit">SUBMIT</button>
+    </form>
+    <script type="text/javascript">
+    document.getElementById("submit-btn").addEventListener("click",function(event){
+        event.preventDefault()
+        var newUser={
+            name: document.getElementById("name").value,
+            img: document.getElementById("img").value,
+            scores: []
+        }
+        var select=document.getElementsByClassName("select")
+        for(var i=0; i<select.length;i++){
+            newUser.scores.push(select[i].options[select[i].selectedIndex].value)
+        }
+        var httpRequest=new XMLHttpRequest()
+        httpRequest.open("POST",window.location.origin+"/api/friends")
+        httpRequest.setRequestHeader("Content-Type","application/json")
+        httpRequest.send(JSON.stringify(newUser))
+        httpRequest.onloadend=function(req,res){
+            var bestMatch=JSON.parse(httpRequest.response)
+            var bestMatchImg= document.createElement("img")
+            bestMatchImg.setAttribute("src", bestMatch.img)
+           document.getElementById("bestMatch").append(bestMatch.name)
+           document.getElementById("bestMatch").append(bestMatchImg)
+        }
+    })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,18 @@
+module.exports=
+[
+    {
+        name:"Ralph",
+        img:"http://placekitten.com/200/300",
+        scores:[1,2,5,4,5,2,3,1,4,1]
+    },
+    {
+        name:"Maggie",
+        img:"http://placekitten.com/200/300",
+        scores:[4,3,2,1,5,3,5,2,2,1]
+    },
+    {
+        name:"Bart",
+        img:"http://placekitten.com/200/300",
+        scores:[1,2,3,4,5,1,2,3,4,5]
+    }
+]
